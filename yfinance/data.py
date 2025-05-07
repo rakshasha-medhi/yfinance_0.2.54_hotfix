@@ -2,7 +2,8 @@ import functools
 import random
 from functools import lru_cache
 
-import requests as requests
+# import requests as requests
+from curl_cffi import requests
 from bs4 import BeautifulSoup
 import datetime
 
@@ -75,7 +76,8 @@ class YfData(metaclass=SingletonMeta):
 
         self._cookie_lock = threading.Lock()
 
-        self._set_session(session or requests.Session())
+        # self._set_session(session or requests.Session())
+        self._set_session(session or requests.Session(impersonate="chrome"))
 
     def _set_session(self, session):
         if session is None:
